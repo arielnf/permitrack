@@ -33,7 +33,7 @@ export default function HomePage() {
     };
 
     checkEmailVerificationToken();
-  }, []);
+  }, [router]); // Agregado 'router' al array de dependencias
 
   const navigateToLogin = () => {
     router.push('/login');
