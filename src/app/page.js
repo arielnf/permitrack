@@ -33,7 +33,7 @@ export default function HomePage() {
     };
 
     checkEmailVerificationToken();
-  }, [router]); // Agregado 'router' al array de dependencias
+  }, [router]);
 
   const navigateToLogin = () => {
     router.push('/login');
@@ -49,12 +49,15 @@ export default function HomePage() {
       <Navbar links={links} showLogout={false} />
       <h1 className="text-3xl font-bold text-center mb-4">Bienvenido a PermitTrack</h1>
       <p className="text-center mb-4">Para continuar, por favor haga login.</p>
-      <button
-        onClick={navigateToLogin}
-        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-      >
-        Login
-      </button>
+      <div className="flex flex-col items-center">
+        <button
+          onClick={navigateToLogin}
+          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 mb-4"
+        >
+          Login
+        </button>
+        <p className="text-center text-gray-600">Aplicación creada por Ariel Nuñez F</p>
+      </div>
     </div>
   );
 }

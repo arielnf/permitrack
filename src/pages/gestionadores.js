@@ -153,7 +153,7 @@ export default function Gestionadores() {
             onChange={(e) => setFiltroEstado(e.target.value)}
             className="p-2 border border-gray-300 rounded"
           >
-            <option value="">Seleccione un estado</option>
+            <option value="">Ver todos</option>
             <option value="pendiente">Pendiente</option>
             <option value="aprobado">Aprobado</option>
             <option value="rechazado">Rechazado</option>
