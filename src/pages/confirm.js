@@ -20,7 +20,7 @@ export default function ConfirmPage() {
     };
 
     checkAuthSession();
-  }, []);
+  }, [router]); // Agrega 'router' aquí
 
   const handlePasswordChange = async () => {
     if (newPassword !== confirmPassword) {
