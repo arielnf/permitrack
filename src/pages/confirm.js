@@ -9,20 +9,34 @@ export default function ConfirmPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const router = useRouter();
 
+  // Verifica la sesión del usuario en el cliente
   useEffect(() => {
     const checkAuthSession = async () => {
-      const { data, error } = await supabase.auth.getSession();
-      if (error || !data.session) {
-        console.error('No hay sesión de autenticación activa:', error?.message);
-        alert('No hay sesión de autenticación activa. Por favor, inicie sesión nuevamente.');
+      if (typeof window === 'undefined') return;  // Solo ejecutar en cliente
+
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error || !data.session) {
+          console.error('No hay sesión activa:', error?.message);
+          alert('No hay sesión de autenticación activa. Por favor, inicie sesión nuevamente.');
+          router.push('/login');  // Redirige a login si no hay sesión activa
+        }
+      } catch (err) {
+        console.error('Error al verificar la sesión:', err.message);
+        alert('Ocurrió un error al verificar la sesión. Inténtalo más tarde.');
         router.push('/login');
       }
     };
 
     checkAuthSession();
-  }, [router]); // Agrega 'router' aquí
+  }, [router]);
 
   const handlePasswordChange = async () => {
+    if (!newPassword || !confirmPassword) {
+      alert('Por favor, completa ambos campos.');
+      return;
+    }
+
     if (newPassword !== confirmPassword) {
       alert('Las contraseñas no coinciden. Por favor, inténtalo de nuevo.');
       return;
@@ -35,14 +49,14 @@ export default function ConfirmPage() {
 
       if (error) {
         console.error('Error al cambiar la contraseña:', error.message);
-        alert('Error al cambiar la contraseña');
+        alert(`Error al cambiar la contraseña: ${error.message}`);
       } else {
-        alert('Contraseña cambiada con éxito');
+        alert('Contraseña cambiada con éxito.');
         router.push('/login');
       }
-    } catch (error) {
-      console.error('Error al cambiar la contraseña:', error.message);
-      alert('Error al cambiar la contraseña');
+    } catch (err) {
+      console.error('Error inesperado al cambiar la contraseña:', err.message);
+      alert('Error inesperado. Por favor, inténtalo más tarde.');
     }
   };
 
