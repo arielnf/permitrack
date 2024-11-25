@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Obtiene las variables de entorno
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseUrl = 'https://zemxmqzvrikiwsepnrxx.supabase.co';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 // Se asegúrate de que las variables no estén vacías
